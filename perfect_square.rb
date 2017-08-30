@@ -1,7 +1,7 @@
 # Given a positive integer num, write a function which returns True if num is a perfect square else False.
 
 def is_perfect_square(num)
-    left = 1
+    left = 2
     right = num
 
     while left + 1 < right do
@@ -20,7 +20,6 @@ def is_perfect_square(num)
     return true if left * left == num || right * right == num
     false
 end
-
 
 # Time: O(log N)
 # Space: O(1)
