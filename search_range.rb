@@ -5,15 +5,10 @@
 
 def search_range(nums, target)
   lRange = find_range_start(nums, target)
+  return [-1, -1] if lRange < 0
   rRange = find_range_end(nums, target)
 
-  if (lRange >= 0 && rRange >= 0) || (lRange < 0 && rRange < 0)
-    [lRange, rRange]
-  elsif rRange < 0
-    [lRange, lRange]
-  else
-    [rRange, rRange]
-  end
+  [lRange, rRange]
 end
 
 def find_range_start(nums, target)
@@ -22,23 +17,18 @@ def find_range_start(nums, target)
 
   while left + 1 < right
     mid = left + (right - left) / 2
-    if nums[mid] == target
-      return mid if nums[mid - 1] < target
-      right = mid
-    elsif nums[mid] < target
-  	  left = mid
+    if nums[mid] < target
+      left = mid
     else
       right = mid
     end
   end
 
-  if nums[left] == target && (left - 1 < 0 || nums[left - 1] < target)
-      return left
-  elsif nums[right] == target && nums[left] != target
-      return right
+  if nums[left] != target
+      return -1
   end
 
-  -1
+  left
 end
 
 def find_range_end(nums, target)
@@ -47,14 +37,7 @@ def find_range_end(nums, target)
 
   while left + 1 < right
     mid = left + (right - left) / 2
-    if nums[mid] == target
-      return mid if nums[mid + 1] > target
-      left = mid
-    elsif nums[mid] < target
-  	  left = mid
-    else
-      right = mid
-    end
+    if nums[mid] > target
   end
 
   if nums[left] == target && nums[right] != target

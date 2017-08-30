@@ -8,7 +8,6 @@ def search_insert(nums, target)
         return nums.length
     end
 
-
     left = 0
     right = nums.size - 1
 
@@ -24,11 +23,7 @@ def search_insert(nums, target)
         end
     end
 
-    if nums[left] == target
-        left
-    else
-        right
-    end
+    nums[left] == target ? left : right
 end
 
 # Time: O(log N)
