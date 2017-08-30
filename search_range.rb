@@ -17,6 +17,7 @@ def find_range_start(nums, target)
 
   while left + 1 < right
     mid = left + (right - left) / 2
+
     if nums[mid] < target
       left = mid
     else
@@ -24,11 +25,13 @@ def find_range_start(nums, target)
     end
   end
 
-  if nums[left] != target
-      return -1
+  if nums[left] == target
+    left
+  elsif nums[right] == target
+    right
+  else
+    -1
   end
-
-  left
 end
 
 def find_range_end(nums, target)
@@ -38,17 +41,17 @@ def find_range_end(nums, target)
   while left + 1 < right
     mid = left + (right - left) / 2
     if nums[mid] > target
+      right = mid
+    else
+      left = mid
+    end
   end
 
-  if nums[left] == target && nums[right] != target
-      return left
-  elsif nums[right] == target && nums[right + 1] != target
-      return right
-  end
-
-  -1
+  nums[right] == target ? right : left
 end
+
+search_range [0, 1, 2, 3, 4, 8, 8, 8, 8, 8, 9, 10], 5
 
 # time: O(log N)
 # space: O(1)
-# leetcode: 73%
+# leetcode: 79%
