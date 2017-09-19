@@ -25,17 +25,25 @@ require 'pry'
 #   return max
 # end
 
+# def max_sub_array(nums)
+#   find_max nums
+# end
+#
+# def find_max(nums, max_current = nums[0], max_global = nums[0], i = 1)
+#   return max_global if i >= nums.length
+#
+#   max_current = [nums[i], max_current + nums[i]].max
+#   max_global = [max_current, max_global].max
+#
+#   find_max nums, max_current, max_global, i + 1
+# end
+
 def max_sub_array(nums)
-  find_max nums
+    dp = [nums.first]
+
+    (1...nums.length).each { |i| dp[i] = [nums[i], dp[i - 1] + nums[i]].max }
+
+    dp.max
 end
 
-def find_max(nums, max_current = nums[0], max_global = nums[0], i = 1)
-  return max_global if i >= nums.length
-
-  max_current = [nums[i], max_current + nums[i]].max
-  max_global = [max_current, max_global].max
-
-  find_max nums, max_current, max_global, i + 1
-end
-
-max_sub_array [4,-2,4,3,2,-1]
+max_sub_array [-2,1,-3,4,-1,2,1,-5,4]
